@@ -7,3 +7,6 @@ class invetimento():
         self.recorrente = recorrente 
         self.total_investimento =  total_investimento
         self.resgate = resgate
+
+
+    
