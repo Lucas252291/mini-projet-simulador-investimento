@@ -122,7 +122,8 @@ def main():
                     barra = cor_verde + "$" * qtd_cifroes + reset
 
                 texto = f"{prefixo} [LCI de {inv.percentual * 100:.2f}% do CDI R${inv.total_investido:.2f}, R${inv.valor_atual:.2f}]"
-                print(texto.ljust(70), barra)
+                largura_texto = 70 
+                print(texto.ljust(largura_texto), barra)
 
         print(f"\n{italico}Resumo da simulação em {meses_nomes[indice_mes_atual]} de {ano_atual}{reset}")
         print("---")
