@@ -1,6 +1,6 @@
 import time
 import os
-from Investimetos import investimento
+from Investimentos import investimento
 
 # Códigos de escape ANSI
 cor_vermelho = "\033[31m"; cor_verde = "\033[32m"; cor_azul = "\033[34m"
@@ -10,7 +10,10 @@ cor_branco = "\033[37m"; italico = "\033[3m"; reset = "\033[0m"
 investimentos = []
 TAXA_CDI_MENSAL = 0.01145 # 1.145% para obter R$2,29 de rendimento em R$200 para 100% CDI
 
-meses_nomes = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+meses_nomes = [
+    "janeiro", "fevereiro", "março", "abril", "maio", "junho", 
+    "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+]
 indice_mes_atual = 3  # Começa em Abril
 ano_atual = 2025
 
@@ -109,7 +112,7 @@ def main():
                 prefixo = f"{cor_verde}[R]{reset}" if inv.recorrente else f"{cor_roxo}[U]{reset}"
                 print(f"{prefixo} LCI de {inv.percentual * 100:.2f}% do CDI R${inv.total_investido:.2f}, R${inv.valor_atual:.2f}")
 
-        print(f"\n{italico}resumo da simulação em {meses_nomes[indice_mes_atual]} de {ano_atual}{reset}")
+        print(f"\n{italico}Resumo da simulação em {meses_nomes[indice_mes_atual]} de {ano_atual}{reset}")
         print("---")
 
         opcao = input(f"\nDigite {cor_azul}[novo]{reset} investimento, {cor_azul}[sair]{reset} ou aperte {cor_azul}[enter]{reset} para avançar em um mês: ").strip().lower()
