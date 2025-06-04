@@ -8,6 +8,7 @@ cor_amarelo = "\033[33m"; cor_roxo = "\033[35m"; cor_ciano = "\033[36m"
 cor_branco = "\033[37m"; italico = "\033[3m"; reset = "\033[0m"
 
 investimentos = []
+MAX_CIFROES = 30 #Máximo de cifrões
 TAXA_CDI_MENSAL = 0.01145 # 1.145% para obter R$2,29 de rendimento em R$200 para 100% CDI
 
 meses_nomes = [
@@ -108,9 +109,20 @@ def main():
         if not investimentos:
             print(f"{italico}Nenhum investimento cadastrado ainda.{reset}")
         else:
-            for inv in investimentos:
+            maior_valor = max(inv.valor_atual for inv in investimentos) if investimentos else 1
+            for idx, inv in enumerate(investimentos):
                 prefixo = f"{cor_verde}[R]{reset}" if inv.recorrente else f"{cor_roxo}[U]{reset}"
-                print(f"{prefixo} LCI de {inv.percentual * 100:.2f}% do CDI R${inv.total_investido:.2f}, R${inv.valor_atual:.2f}")
+                if inv.valor_atual < 1000:
+                    barra = ""
+                elif inv.valor_atual // 1000 < MAX_CIFROES:
+                    barra = cor_verde + "$" * int(inv.valor_atual // 1000) + reset
+                else:
+                    proporcao = inv.valor_atual / maior_valor
+                    qtd_cifroes = max(1, int(proporcao * MAX_CIFROES))
+                    barra = cor_verde + "$" * qtd_cifroes + reset
+
+                texto = f"{prefixo} [LCI de {inv.percentual * 100:.2f}% do CDI R${inv.total_investido:.2f}, R${inv.valor_atual:.2f}]"
+                print(texto.ljust(70), barra)
 
         print(f"\n{italico}Resumo da simulação em {meses_nomes[indice_mes_atual]} de {ano_atual}{reset}")
         print("---")
